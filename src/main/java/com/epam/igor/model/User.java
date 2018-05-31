@@ -10,15 +10,15 @@ import java.time.LocalDate;
 @Table(name = "USERS")
 public class User extends BaseEntity{
 
-    @Column(name = "BIRTHDAY")
-    @Convert(converter = DateTimeConverter.class)
-    private LocalDate birthday;
+    //@Column(name = "BIRTHDAY")
+   // @Convert(converter = DateTimeConverter.class)
+   // private LocalDate birthday;
     @Column(name = "EMAIL")
     private String    email;
     @Column(name = "NAME")
     private String    name;
-    //@Column(name = "PASSWORD")
-    //private String password;
+    @Column(name = "PASSWORD")
+    private String password;
     //@Column(name = "ROLE")
    // private Role role = Role.ROLE_REGISTERED_USER;
 
@@ -38,21 +38,21 @@ public class User extends BaseEntity{
         this.name = name;
     }
 
-    public LocalDate getBirthday() {
-        return birthday;
+//    public LocalDate getBirthday() {
+//        return birthday;
+//    }
+//
+//    public void setBirthday(LocalDate birthday) {
+//        this.birthday = birthday;
+//    }
+
+    public String getPassword() {
+        return password;
     }
 
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
+    public void setPassword(String password) {
+        this.password = password;
     }
-
-   // public String getPassword() {
-   //     return password;
-  //  }
-
-  //  public void setPassword(String password) {
-    //    this.password = password;
-  //  }
 
 //    public Role getRole() {
 //        return role;
@@ -65,7 +65,7 @@ public class User extends BaseEntity{
     @Override
     public String toString() {
         return "User{" +
-                "birthday=" + birthday +
+               // "birthday=" + birthday +
                 ", email='" + email + '\'' +
                 ", name='" + name + '\'' +
                 '}';

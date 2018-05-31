@@ -13,7 +13,7 @@
                 type="com.epam.igor.action.ShowUsersAction"
                 name="userForm"
                 scope="request">
-            <forward name="success" path="user-list"/>
+            <forward name="success" path="/WEB-INF/jsp/user-list.jsp"/>
         </action>
     </action-mappings>
 </struts-config>

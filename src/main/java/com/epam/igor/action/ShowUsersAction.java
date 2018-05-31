@@ -19,17 +19,12 @@ public class ShowUsersAction extends Action {
     private static final String ID = "id";
     /**
      * Method takes all {@link User} and sends it to page for displaying
-     *
      * @param mapping  of struts
      * @param form     going to page for displaying
      * @param request  going on view
      * @param response going on view
      * @return ActionForward object that contain mapping on forward page
      */
-    public ActionForward view(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws ActionException {
-        takeUsers((UserForm) form);
-        return mapping.findForward("view");
-    }
     @Override
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws ActionException {
         UserForm userForm = (UserForm) form;
@@ -37,10 +32,5 @@ public class ShowUsersAction extends Action {
         List<User> users = service.getAllUsers();
         userForm.setUsers(users);
         return mapping.findForward(SUCCESS);
-    }
-    private void takeUsers(UserForm form) throws ActionException {
-        UserService service = new UserService();
-        List<User> users = service.getAllUsers();
-        form.setUsers(users);
     }
 }

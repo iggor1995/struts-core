@@ -7,8 +7,8 @@
 
 YA TUT
 <div class="well">
-    <logic:iterate name="userForm" property="usersList" id="user">
-        <bean:message key="user.name"/><br/>
+    <logic:iterate name="userForm" property="users" id="user">
+        <%--<bean:message key="user.name"/><br/>--%>
         <bean:write name="user" property="name"/><br>
     </logic:iterate>
 </div>
