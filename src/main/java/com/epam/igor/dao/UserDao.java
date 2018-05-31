@@ -2,6 +2,9 @@ package com.epam.igor.dao;
 
 import com.epam.igor.model.User;
 
+import javax.persistence.Query;
+import java.util.List;
+
 public class UserDao extends AbstractDao implements Dao<User> {
 
     @Override
@@ -22,5 +25,11 @@ public class UserDao extends AbstractDao implements Dao<User> {
     @Override
     public void delete(int id) throws DaoException {
 
+    }
+
+    public List<User> getAll(){
+        rebootManager();
+        Query query = entityManager.createQuery("FROM User ", User.class);
+        return query.getResultList();
     }
 }
