@@ -10,17 +10,18 @@ import java.time.LocalDate;
 @Table(name = "USERS")
 public class User extends BaseEntity{
 
-    //@Column(name = "BIRTHDAY")
-   // @Convert(converter = DateTimeConverter.class)
-   // private LocalDate birthday;
+    @Column(name = "BIRTHDAY")
+    @Convert(converter = DateConverter.class)
+    private LocalDate birthday;
     @Column(name = "EMAIL")
-    private String    email;
+    private String email;
     @Column(name = "NAME")
-    private String    name;
+    private String name;
     @Column(name = "PASSWORD")
     private String password;
-    //@Column(name = "ROLE")
-   // private Role role = Role.ROLE_REGISTERED_USER;
+    @Column(name = "ROLE")
+    @Convert(converter = RoleConverter.class)
+    private Role role = Role.ROLE_REGISTERED_USER;
 
     public String getEmail() {
         return email;
@@ -38,13 +39,13 @@ public class User extends BaseEntity{
         this.name = name;
     }
 
-//    public LocalDate getBirthday() {
-//        return birthday;
-//    }
-//
-//    public void setBirthday(LocalDate birthday) {
-//        this.birthday = birthday;
-//    }
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
 
     public String getPassword() {
         return password;
@@ -54,18 +55,18 @@ public class User extends BaseEntity{
         this.password = password;
     }
 
-//    public Role getRole() {
-//        return role;
-//    }
-//
-//    public void setRole(Role role) {
-//        this.role = role;
-//    }
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     @Override
     public String toString() {
         return "User{" +
-               // "birthday=" + birthday +
+                "birthday=" + birthday +
                 ", email='" + email + '\'' +
                 ", name='" + name + '\'' +
                 '}';

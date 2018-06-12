@@ -7,6 +7,12 @@
     <form-beans>
         <form-bean name="userForm"
                    type="com.epam.igor.form.UserForm"/>
+        <form-bean name="eventForm"
+                   type="com.epam.igor.form.EventForm"/>
+        <form-bean name="LoginForm"
+                   type="com.epam.igor.form.LoginForm"/>
+        <form-bean name="registerForm"
+                   type="com.epam.igor.form.RegisterForm"/>
     </form-beans>
     <action-mappings>
         <action path="/userList"
@@ -14,6 +20,41 @@
                 name="userForm"
                 scope="request">
             <forward name="success" path="/WEB-INF/jsp/user-list.jsp"/>
+        </action>
+        <action path="/eventList"
+                type="com.epam.igor.action.ShowEventsAction"
+                name="eventForm"
+                scope="request">
+            <forward name="success" path="/WEB-INF/jsp/event-list.jsp"/>
+        </action>
+        <action path="/loginPage"
+                type="com.epam.igor.action.ShowLoginPageAction"
+                name="LoginForm"
+                validate="false"
+                scope="request">
+            <forward name="success" path="/WEB-INF/jsp/login.jsp"/>
+        </action>
+        <action path="/login"
+                input="/login.jsp"
+                name="LoginForm"
+                scope="session"
+                type="com.epam.igor.action.LoginAction">
+            <forward name="success" path="/WEB-INF/jsp/success.jsp"/>
+            <forward name="failure" path="/WEB-INF/jsp/failure.jsp"/>
+        </action>
+        <action path="/home"
+                type="com.epam.igor.action.ShowHomePageAction"
+                name="eventForm"
+                validate="false"
+                scope="request">
+            <forward name="success" path="/WEB-INF/jsp/home.jsp"/>
+        </action>
+        <action path="/register"
+                type="com.epam.igor.action.RegisterUserAction"
+                name="registerForm"
+                validate="false"
+                scope="request">
+            <forward name="success" path="/WEB-INF/jsp/home.jsp"/>
         </action>
     </action-mappings>
 </struts-config>

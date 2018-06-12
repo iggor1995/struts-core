@@ -2,44 +2,21 @@ package com.epam.igor.model;
 
 import com.epam.igor.util.CsvUtil;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.List;
 
-public class Auditorium {
+@Entity
+@Table(name = "AUDITORIUMS")
+public class Auditorium extends BaseEntity {
 
-    private long   id;
+    @Column(name = "NAME")
     private String name;
+    @Column(name = "SEATS")
     private int    seatsNumber;
+    @Column(name = "VIP")
     private String vipSeats;
-
-    public Auditorium() {
-    }
-
-    public Auditorium(String name, int seatsNumber, List<Integer> vipSeats) {
-        this(-1, name, seatsNumber, vipSeats);
-    }
-
-    public Auditorium(long id, String name, int seatsNumber, List<Integer> vipSeats) {
-        this(id, name, seatsNumber, CsvUtil.fromListToCsv(vipSeats));
-    }
-
-    public Auditorium(long id, String name, int seatsNumber, String vipSeats) {
-        this.id = id;
-        this.name = name;
-        this.seatsNumber = seatsNumber;
-        this.vipSeats = vipSeats;
-    }
-
-    public Auditorium withId(Long id) {
-        return new Auditorium(id, name, seatsNumber, vipSeats);
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -82,7 +59,7 @@ public class Auditorium {
 
         Auditorium that = (Auditorium) o;
 
-        if (id != that.id)
+        if (getId() != that.getId())
             return false;
         if (seatsNumber != that.seatsNumber)
             return false;
@@ -94,7 +71,7 @@ public class Auditorium {
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
+        int result = (int) (getId() ^ (getId() >>> 32));
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + seatsNumber;
         result = 31 * result + (vipSeats != null ? vipSeats.hashCode() : 0);
@@ -104,7 +81,7 @@ public class Auditorium {
     @Override
     public String toString() {
         return "Auditorium{" +
-               "id=" + id +
+               "id=" + getId() +
                ", name='" + name + '\'' +
                ", seatsNumber=" + seatsNumber +
                ", vipSeats=" + vipSeats +

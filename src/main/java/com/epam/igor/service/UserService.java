@@ -22,4 +22,18 @@ public class UserService {
         UserDao userDao = new UserDao();
         return userDao.getAll();
     }
+
+    public User getUserByEmail(String email) {
+        UserDao userDao = new UserDao();
+        return userDao.getUserByEmail(email);
+    }
+
+    public User registerUser(User user) throws ServiceException {
+        try {
+            UserDao userDao = new UserDao();
+            return userDao.update(user);
+        } catch (DaoException e) {
+            throw new ServiceException("couldn't save user", e);
+        }
+    }
 }

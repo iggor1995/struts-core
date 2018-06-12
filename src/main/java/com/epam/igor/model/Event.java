@@ -1,43 +1,28 @@
 package com.epam.igor.model;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
-public class Event {
+@Entity
+@Table(name = "EVENTS")
+public class Event extends BaseEntity {
 
-    private long          id;
+    @Column(name = "NAME")
     private String        name;
+    @Column(name = "RATE")
+    @Convert(converter = RateConverter.class)
     private Rate          rate;
+    @Column(name = "PRICE")
     private double        basePrice;
+    @Column(name = "TIME")
+    @Convert(converter = DateTimeConverter.class)
     private LocalDateTime dateTime;
-    private Auditorium auditorium;
+    @ManyToOne
+    @JoinColumn(name = "AUDITORIUM_ID", insertable = false, updatable = false, nullable = false)
+    private Auditorium    auditorium;
 
-    public Event() {
-    }
-
-    public Event(String name, Rate rate, double basePrice, LocalDateTime dateTime, Auditorium auditorium) {
-        this(-1, name, rate, basePrice, dateTime, auditorium);
-    }
-
-    public Event(long id, String name, Rate rate, double basePrice, LocalDateTime dateTime, Auditorium auditorium) {
-        this.id = id;
-        this.name = name;
-        this.rate = rate;
-        this.basePrice = basePrice;
-        this.dateTime = dateTime;
-        this.auditorium = auditorium;
-    }
-
-    public Event withId(Long eventId) {
-        return new Event(eventId, this.name, this.rate, this.basePrice, this.dateTime, this.auditorium);
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
+    @Column(name = "AUDITORIUM_ID")
+    private long          auditoriumId;
 
     public String getName() {
         return name;
@@ -71,6 +56,14 @@ public class Event {
         this.dateTime = dateTime;
     }
 
+    public long getAuditoriumId() {
+        return auditoriumId;
+    }
+
+    public void setAuditoriumId(long auditoriumId) {
+        this.auditoriumId = auditoriumId;
+    }
+
     public Auditorium getAuditorium() {
         return auditorium;
     }
@@ -88,8 +81,6 @@ public class Event {
 
         Event event = (Event) o;
 
-        if (id != event.id)
-            return false;
         if (Double.compare(event.basePrice, basePrice) != 0)
             return false;
         if (name != null ? !name.equals(event.name) : event.name != null)
@@ -106,7 +97,7 @@ public class Event {
     public int hashCode() {
         int result;
         long temp;
-        result = (int) (id ^ (id >>> 32));
+        result = (getId() ^ (getId() >>> 32));
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (rate != null ? rate.hashCode() : 0);
         temp = Double.doubleToLongBits(basePrice);
@@ -119,7 +110,7 @@ public class Event {
     @Override
     public String toString() {
         return "Event{" +
-               "id=" + id +
+               "id=" + getId() +
                ", name='" + name + '\'' +
                ", rate=" + rate +
                ", basePrice=" + basePrice +

@@ -5,10 +5,11 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-YA TUT
 <div class="well">
     <logic:iterate name="userForm" property="users" id="user">
-        <%--<bean:message key="user.name"/><br/>--%>
+
         <bean:write name="user" property="name"/><br>
+
+        <bean:write name="user" property="email"/><br>
     </logic:iterate>
 </div>
